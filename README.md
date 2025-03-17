@@ -381,8 +381,7 @@ Show him existing table and ask him to make a replica --> Copy constructor [ avo
 
 ==================
 
-static members, relationship between objects.
-
+static members
 
 We need a member to keep track of how many instance s of Account exist?
 
@@ -395,3 +394,119 @@ instance method: use object context to invoke.
 Rule: static methods can't access instance variables. 
 
 first argument to instance method is implicit "this", for static methods "this" is not passed.
+
+=========
+
+Relationship between objects:
+1) Generalization and Specialization
+2) Realization
+3) Association [composition or aggregation]
+4) Uses A
+
+Java build tools:
+1) IDE: IntelliJ / Eclispe / NetBeans / BlueJ / ...
+2) Checkstyle: used to check Coding conventions like NamingConventions and Java comments
+3) PMD/FindBugs: used to check coding standards like proper conditional statements, empty catch block,
+copy & paste code...
+4) SONAR: 2 and 3 combined
+5) Jenkins: CI/CD pipeline
+6) Repository: Git, BitBucket, SVN,...
+...
+
+class Object
+
+https://www.youtube.com/watch?v=hXkzfLaps8s
+
+Problem: She said I keep Tv in my Pocket. Tailor 32' pocket
+She should have told, I keep Mobile in my pocket which has Tv  App
+
+=================
+
+Understanding Inheritance:
+
+Part 1: Memory is allocated for inherited members also in heap area
+```
+    class Product {
+        private int id;
+        private String name;
+        private double price;
+    }
+
+    public class Mobile extends Product{
+        private String connectivity;
+    }
+
+    new Mobile(); // check PDF
+
+```
+
+To avoid too much level of Inheritance we use design Pattern - Bridge Pattern, instead of single hererachy, we split hierarchy.
+
+Part 2: Constructor Chaining
+
+```
+ class Product {
+       public Product() {
+        prints P1
+       }
+
+         public Product(int id, String name) {
+            prints P2
+       }
+
+    }
+
+    public class Mobile extends Product{
+        public Mobile() {
+             prints M1
+       }
+
+        public Mobile(int id, String name, String connectivity) {
+            super(id, name);
+            prints M2
+       }
+    }
+
+    new Mobile(); // P1, followed by M1
+    new Mobile(34, "iPhone 6e", "5G"); // P1, followed by M2
+```
+
+Part 3: Method invocation
+
+```
+class Product {
+        public String getName() {
+            return name;
+        }
+        public double getPrice() {
+            return 0;
+        }
+
+    }
+
+    public class Mobile extends Product{
+        public String getConnectivity() {
+            return "3G";
+        }
+        public double getPrice() { // override
+            return 50,000;
+        }
+    }
+
+    Mobile m = new Mobile(1, "Samsung Fold");
+    m.getName(); // valid
+    m.getPrice(); // dynamic binding --> 50,000.00
+    m.getConnectivity(); // 3G
+
+    Product p = new Mobile(1, "Samsung Fold");
+    p.getName(); // valid
+    p.getPrice(); // dynamic binding --> 50,000.00
+    p.getConnectivity(); // Fails, Product doesn't know about getConnectivity() message
+
+```
+
+Rule:
+1) which method gets called is based on what the pointer is pointing to [Right hand side].
+2) Remote / reference / left hand side of "=" will decide which methods/messages can be sent
+
+Overriding: base class already contains the behaviour, specialized one overrides the behaviour.
