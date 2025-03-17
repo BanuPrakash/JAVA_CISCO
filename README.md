@@ -525,5 +525,15 @@ p instanceof Tv ==> false
 for strict checking use Class Info
 getClass()
 
+How do you invoke a method?
+1) If we know the method name in advance
+context.method(argumets)
+
+2) If we have pointer to a method
+m.invoke(context);
+
+Example:
+m is pointing to getPrice()
+m.invoke(p); --> as good as p.getPrice();
 
 

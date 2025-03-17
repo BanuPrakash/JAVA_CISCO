@@ -4,6 +4,8 @@ import com.cisco.prj.entity.Mobile;
 import com.cisco.prj.entity.Product;
 import com.cisco.prj.entity.Tv;
 
+import java.lang.reflect.Method;
+
 public class ProductClient {
     public static void main(String[] args) {
         Product[] products = new Product[5]; // Array of pointers to Product type, not actual Product
@@ -16,8 +18,29 @@ public class ProductClient {
         printExpensive(products);
         System.out.println("********");
         printDetails(products);
+
+        printDetailsOCP(products);
     }
 
+    // OCP
+    private static void printDetailsOCP(Product[] products) {
+        for(Product p : products) {
+            Method[] methods = p.getClass().getMethods();
+            for(Method m : methods) {
+                if(m.getName().startsWith("get")) {
+                    try {
+                        Object ret = m.invoke(p); // m can be getId(), getPrice(),,,
+                        System.out.println(m.getName().substring(3) + " : " + ret);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            System.out.println("%%%%%%%%");
+        }
+    }
+
+    // Is this OCP?
     private static void printDetails(Product[] products) {
         for(Product p : products) {
             System.out.println(p.getName() + ", " + p.getPrice());
