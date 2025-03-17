@@ -383,5 +383,13 @@ Show him existing table and ask him to make a replica --> Copy constructor [ avo
 
 static members, relationship between objects.
 
-Resume @ 2:00
+
+We need a member to keep track of how many instance s of Account exist?
+
+static variable: class member, all objects of the given class share the memory [ metaspace]
+instance variables: object members, each object will have a member in heap area
+
+static methods: use class to invoke
+instance method: use object context to invoke.
+
 
