@@ -187,3 +187,84 @@ JDK provides compiler to convert java code to bytecode
 KDK provides compiler to covert kotlin to bytecode
 3) Groovy ...
 
+===========================================================
+Data types:
+Integeral types
+byte -- 1 byte
+short -- 2 bytes
+int --> 4 bytes 
+long --> 8 bytes
+
+float --> 4 bytes
+double --> 8 bytes
+
+char --> 2 bytes of UNICODE character set [ ASCII is 1 byte]
+
+boolean --> 1 byte [ true or false]
+
+Java as programming language:
+
+```
+Account.java
+public class Account {
+    private double balance; // state of object
+
+    // behaviour / action / message
+    public void deposit(double amt) {
+        this.balance += amt;
+    }
+
+    // behaviour / action / message
+    public double getBalance() {
+        return this.balance;
+    }
+}
+
+```
+JDK comes with compiler:
+javac Account.java ===> Account.class [ bytecode]
+
+bytecode is platform independent and architecture neutral
+
+
+```
+AccountExample.java
+
+public class AccountExample {
+    public static void main(String[] args) {
+        Account rahulAcc = new Account();
+        Account swethaAcc = new Account();
+
+        rahulAcc.deposit(4000);
+        swethaAcc.deposit(5000);
+
+        System.out.println(rahulAcc.getBalance());
+    }
+}
+
+```
+
+javac AccountExample.java --> AccountExample.class [bytecode]
+
+=============
+
+to start JavaRuntime Environment [JRE]
+java AccountExample
+
+set CLASSPATH= .;c:\temp;d:\lib;d:\projects\lib;
+
+new keyword is for dynamic memory allocation, like malloc / calloc of C programming
+memory is allocated on HEAP area
+
+tv.on(); here tv is the context
+ac.on(); context here AC
+
+context.message(arguments);
+
+tv.changeChannel(454); 
+tv.setVolume(45);
+
+deposit(swethaAcc, 5000);
+
+getBalance(rahulAcc);
+
