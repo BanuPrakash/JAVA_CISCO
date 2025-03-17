@@ -536,4 +536,7 @@ Example:
 m is pointing to getPrice()
 m.invoke(p); --> as good as p.getPrice();
 
+m is pointing to setPrice(amt);
+m.invoke(p, 5000);
 
+==
