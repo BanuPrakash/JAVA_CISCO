@@ -392,4 +392,6 @@ instance variables: object members, each object will have a member in heap area
 static methods: use class to invoke
 instance method: use object context to invoke.
 
+Rule: static methods can't access instance variables. 
 
+first argument to instance method is implicit "this", for static methods "this" is not passed.

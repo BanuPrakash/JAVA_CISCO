@@ -32,6 +32,7 @@ public class Account {
 
     // class member
     public static int getCount() {
+       // this.balance; no implicit this for static methods
         return  count;
     }
 }
