@@ -221,6 +221,7 @@ public class Account {
 }
 
 ```
+
 JDK comes with compiler:
 javac Account.java ===> Account.class [ bytecode]
 
@@ -267,4 +268,97 @@ tv.setVolume(45);
 deposit(swethaAcc, 5000);
 
 getBalance(rahulAcc);
+
+=================================
+
+Logically grouping of objects/classes in enterprise application
+1) entity classes 
+they represent business data. data which is long lived, generally survives the application crash. they have storage like database, redis, files, ...
+
+Example for Uber:
+Customer, Vehicle, Driver, Trip, Payment,,, 
+
+Example for Amazon:
+Customer, Product, Seller, Order, LineItem, Payment, ...
+
+Most of the time these classes contains state, constructors, accessor, mutation code. No business logic inside this
+
+https://www.database-answers.com/data_models/
+
+
+Example:
+```
+    public class Customer {
+        private String email; // state
+        private String password; // state
+        private String firstName;  // state
+        
+        //mutation
+        public void setPassword(String pwd) {
+            this.password = pwd;
+        }
+        
+        //accessor
+        public String getFirstName() {
+            retutn this.firstName;
+        }
+    }
+
+```
+
+2) DAO: Data Access Objects
+This contains code for CRUD operations [CREATE READ UPDATE and DELETE operations]
+
+```
+    public class CustomerDao {
+        public void register(Customer c) {
+            INSERT INTO customers table ....
+        }
+
+        public boolean login(Customer c) {
+            select email and password from database table ...
+        }
+    }
+
+```
+
+3) Service classes: acts as a facade over DAO and buisness logic
+Also decide what needs to be exposed to the client...
+
+```
+    public class BankingService {
+        // one method call from client
+        public void transferFunds(Account fromAcc, Account toAcc, double amt) {
+            // check balance in fromAcc
+            // business check if customer is eligible to transfer ...
+            // update toAcc
+            // update fromAcc
+            // insert into transaction table
+            // send SMS
+            // send EMAIL
+        }
+    }
+
+```
+
+4) Utility classes: helper classes
+5) Client classes: Android / Web based / Console based ...
+6) Exception classes ...
+
+===============
+
+In java we use packages to logically group classes.
+Packages are nothing but a folders
+
+=====
+
+In IDEs build is enabled by default which does the job of "javac"
+
+state / instance variable are created for every object in heap area
+
+visiblity mode:
+1) private : visible only for class members
+2) public: visible every where, inside the current class as well as classes present in other packages also.
+3) default [package private]: [no access modifier specifed] visible to all classes within the same package. Not visible outside of package
+4) protected: ...
 
