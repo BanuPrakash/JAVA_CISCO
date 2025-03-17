@@ -362,3 +362,26 @@ visiblity mode:
 3) default [package private]: [no access modifier specifed] visible to all classes within the same package. Not visible outside of package
 4) protected: ...
 
+=============
+
+Constructors:
+1) sort of special methods which has same name as that of class
+2) no explict return type
+3) they are invoked as soon as the object is created.
+4) We can't explictly call the constructor
+5) constructors can be overloaded [ more than one]
+6) main purpose of constructor is used to initialize an object
+7) Compiler creates default constructor if we don't write any.
+If we write our own constructor then it's our responsibility to provide default also
+Call a carpenter and ask him you need a Computer table [ he uses default values --> default constructor]
+
+Give Carpepter the dimensions [ 4x2x3] --> parametrized constructor
+
+Show him existing table and ask him to make a replica --> Copy constructor [ avoid in Java]
+
+==================
+
+static members, relationship between objects.
+
+Resume @ 2:00
+
