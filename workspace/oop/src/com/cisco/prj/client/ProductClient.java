@@ -10,12 +10,32 @@ public class ProductClient {
         products[0] = new Mobile(52, "iPhone 6", 89000.00, "5G");
         products[1] = new Tv(56, "Onida Thunder", 3200.00, "CRT");
         products[2] = new Tv(71, "Sony Bravia 6", 2_32_000.00, "OLED");
-        products[3] = new Mobile(13, "MotoG", 12000.00, "5G");
+        products[3] = new Mobile(13, "MotoG", 12000.00, "4G");
         products[4] = new Product(511,"Dummy", 0); // should not be valid, fix it
 
         printExpensive(products);
+        System.out.println("********");
+        printDetails(products);
     }
 
+    private static void printDetails(Product[] products) {
+        for(Product p : products) {
+            System.out.println(p.getName() + ", " + p.getPrice());
+            // before down-casting, type checking has to be done
+            if(p instanceof Mobile) {
+                Mobile m = (Mobile) p; // down-casting
+                System.out.println(m.getConnectivity());
+            }
+            if(p.getClass() == Tv.class) { // strict checking
+                Tv t = (Tv) p;
+                System.out.println(t.getScreenType());
+            }
+            System.out.println("-------");
+        }
+    }
+
+    // OCP, this method is closed for Change and open for extension
+    // if we add another type of product like WashingMachine, DishWasher, ...
     private static void printExpensive(Product[] products) {
         for(Product p : products) {
             if(p.isExpensive()) { // dynamic binding, polymorphism

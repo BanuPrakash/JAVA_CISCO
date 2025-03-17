@@ -510,3 +510,20 @@ Rule:
 2) Remote / reference / left hand side of "=" will decide which methods/messages can be sent
 
 Overriding: base class already contains the behaviour, specialized one overrides the behaviour.
+
+```
+instanceof --> family of
+
+Product p = new Mobile();
+
+p instanceof Mobile ==> true
+p instanceof Product ==> true
+p instanceof Object ===> true
+p instanceof Tv ==> false
+
+```
+for strict checking use Class Info
+getClass()
+
+
+
