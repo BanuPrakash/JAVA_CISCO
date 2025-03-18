@@ -715,6 +715,7 @@ Class.forName("com.cisco.prg.entity.Mobile").getConstructor().newInstance(); // 
 is similar as:
 new Mobile();
 
+```
 =========================
 
 interfaces as a contract for OCP.
