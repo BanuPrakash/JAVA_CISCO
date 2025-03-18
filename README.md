@@ -864,7 +864,7 @@ toString() will be called whenever object has to be converted to a String
 System.out.println(p); // p is a product
 
 
-
+"Arrays" class is a utility / algorithm class which contains methods for sort, max, min, binarySearch, ... which works on Comparable / Comparator contract
 
 
 
