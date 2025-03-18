@@ -884,7 +884,44 @@ Lambda expressions:
 A lambda expression is a short block of code which takes in parameters and returns a value.
 lambda expression can be used instead of anonymous class if interface has only one method to implement.
 
+Java Collection Framework:
+List, Set, Queue, Map are data containers
+
+```
+List:                                        
+* ordered collection                                                   
+* supports duplicate elements
+* can be re-ordered
+* supports index based operation like get(5); add(obj, 10); remove(3);
+
+Set:
+* ordering is based on algorithm  
+* unique
+* can't re-order
+* doesn't support index based operation
+
+```
+Usage of List data container:
+
+Option 1: Avoid this
+ArrayList list = new ArrayList();
+always program to interface.
+Always use generics, else it is not type-safe
+
+list.add("a");
+list.add(new Product());
+list.add(new Account()); 
+
+if(list.get(1) instanceof Product) {
+    Product p = (Product) list.get(1);
+}
+
+Option 2:
+List<Product> list = new ArrayList<Product>();
+list.add("a"); // fails
+list.add(new Product());
+no need to type-check
+Product p = list.get(1);
 
 
-
-
+Collections contain algorithms like sort, max, binarySearch similar to Arrays but can be used on List type of data-container.
