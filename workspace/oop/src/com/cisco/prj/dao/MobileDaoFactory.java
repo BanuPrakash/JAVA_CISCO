@@ -13,6 +13,7 @@ public class MobileDaoFactory {
         CLASS_NAME = res.getString("MOBILE_DAO");
     }
 
+
     public static  MobileDao getMobileDao() {
         // return new MobileDaoMongoImpl();
         try {

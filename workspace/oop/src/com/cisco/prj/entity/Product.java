@@ -1,7 +1,7 @@
 package com.cisco.prj.entity;
 
 // Think Liskov substitution Principle while building generalized object
-public abstract class Product {
+public abstract class Product implements Comparable {
     private int id;
     private String name;
     private double price;
@@ -45,4 +45,17 @@ public abstract class Product {
 //    }
 
     public abstract boolean isExpensive();
+
+    // p1.compareTo(p2);
+    // p1 is "this"
+    // p2 is passed as o
+    public int compareTo(Object other){
+        Product p = (Product) other;
+        if(this.price > p.price) {
+            return 1;
+        } else  if(p.price > this.price) {
+            return  -1;
+        }
+        return  0;
+    }
 }

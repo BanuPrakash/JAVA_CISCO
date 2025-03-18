@@ -701,7 +701,9 @@ Solution: use configuration files like xml / JSON / properties ...
 
 config.properties is a key/value pair
 ```
+
 MOBILE_DAO=com.cisco.prj.dao.MobileDaoDbImpl
+
 ```
 
 load a class programatically:
@@ -713,5 +715,20 @@ Class.forName("com.cisco.prg.entity.Mobile").getConstructor().newInstance(); // 
 is similar as:
 new Mobile();
 
+=========================
 
+interfaces as a contract for OCP.
 
+Requirement: Sort objects, not sure as of writing this method what type of objects will be passed.
+
+```
+
+sort(Circle[] circles) {}
+sort(Rectangle[] rectangles) {}
+sort(String[] names) {}
+
+public interface Comparable {
+    public int compareTo(Object o);
+}
+
+``
