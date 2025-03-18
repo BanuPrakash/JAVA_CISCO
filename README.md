@@ -602,6 +602,7 @@ Without upcasting:
     for(Tv t: tvs) {
         ...
     }
+
 ```
 
 =====================
@@ -635,10 +636,12 @@ Realization establishes a contract where the client (the implementing element) p
 Example interface for a Contract:
 
 ```
+
 public interface UserDao {
      void register(User user);
      boolean login(String username, String password);
 }
+
 ```
 
 By default all the methods in interface are public and abstract.
@@ -659,8 +662,10 @@ Strategy Design Pattern
 Switching between strategies:
 
 ```
+
 //        MobileDao mobileDao = new MobileDaoDbImpl();
         MobileDao mobileDao = new MobileDaoMongoImpl();
+
 ```
 
 There is a problem with above code.
@@ -705,6 +710,8 @@ Class.forName("com.cisco.prg.entity.Mobile"); loads Mobile class into JVM / JRE 
 
 Class.forName("com.cisco.prg.entity.Mobile").getConstructor().newInstance(); // create object
 
-is same as:
-
+is similar as:
 new Mobile();
+
+
+
