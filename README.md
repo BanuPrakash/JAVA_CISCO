@@ -732,4 +732,65 @@ public interface Comparable {
     public int compareTo(Object o);
 }
 
-``
+```
+
+Exception Handling:
+
+Any abnormal condition that arises during program execution is an exception.
+these exceptions can be broadly classified as "error type" and "exception type"
+Error type of exceptions are once where we can't have solution and alternate flow. Program is bound to crash
+
+Exception type of exceptions are once where we can handle and provide alternate flow/solution.
+
+Examples of Error type of exceptions:
+1) StackOverflowError
+2) OutOfMemoryError
+3) UnsatisfiedLinkError
+
+Exception: is an object which tells
+a) What went wrong
+b) Why did it go wrong
+c) Where did it go wrong
+
+Exception type of exceptions can be classified into:
+
+a) Unchecked type of exception
+exceptions for which compiler doesn't enforce you to handle.
+these exceptions are a result of problem within JRE
+Supposed to be handled with conditional statements.
+
+```
+    int x = 10;
+    int y = 0;
+    if( y != 0) {
+      int res = x / y;
+    }
+
+```
+b) Checked type of exception
+exceptions occuring outside of JRE like database, OS, Sockets, ...
+Since exceptions has already been created outside of JRE and propagated to your program,
+compiler enforces you to handle it
+Syntax for handling is :
+
+```
+
+    try {
+        // actual code 
+    } catch(ExceptionType1 ex) {
+        ..
+    } catch(ExceptionType2 ex) {
+        ...
+    } finally {
+        // optional
+        // here we write code to release resources like DB connection, close of files, sockets
+    }
+
+finally block is a compulsary execute code, gets called if exception occurs or not
+
+```
+
+"throws" is to inform the caller that a certain type of exception might occur while executing a method()
+
+More on this in database coding.
+
