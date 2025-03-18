@@ -844,5 +844,30 @@ Double is a type wrapper for "double"
 Byte is a type wrapper for "byte"
 ...
 
+============
+
+Java Collection Framework --> data containers in java
+
+Array is a data container, most prefered container
+Problems of array:
+1) size is fixed, can't grow nor shrink
+User[] users = new User[100];
+2) adding  / removing elements in arbitray position is difficult, move other elements up / down
+3) needs contiguos memory
+
+Comparable and Comparator interfaces : meant of object comparision
+Comparable: this has to be used if the object itself is providing the comparison criteria
+Comparator: this is used by the client, to compare based on different criteria
+
+toString() will be called whenever object has to be converted to a String
+
+System.out.println(p); // p is a product
+
+
+
+
+
+
+
 
 
