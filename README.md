@@ -655,3 +655,38 @@ Why program to interface?
 "extends" --> Speacialization [IS A]
 "implements" --> realization [ contract / protocol / follow the rules ..], does not establish a IS A
 
+Strategy Design Pattern
+Switching between strategies:
+
+```
+//        MobileDao mobileDao = new MobileDaoDbImpl();
+        MobileDao mobileDao = new MobileDaoMongoImpl();
+```
+
+There is a problem with above code.
+1) Too many clients like Android, swift, Console based , Web application ,...
+Every client needs to update the implmentation
+2) Why should the developers of client application know about implementation
+
+Solution: Use Factory method [ Factory design Pattern]
+
+Client decides which type is required:
+
+```
+    public class PlantFactory {
+
+        public static Plants[] getPlants(String season) {
+            case "SUMMER":
+                ...
+            case "WINTER":
+                ...
+            case "SPRING":
+                ..
+        }
+    }
+
+
+    CLient:
+    Plants[] = PlantFactory.getPlants("SUMMER");
+    
+```
