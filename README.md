@@ -794,3 +794,55 @@ finally block is a compulsary execute code, gets called if exception occurs or n
 
 More on this in database coding.
 
+====================
+
+Generics:
+A generic type is a generic class or interface that is parameterized over types.
+
+
+```
+
+public class Rectangle {
+    private int width;
+    private int breadth;
+    ...
+}
+
+Rectangle r1 = new Rectangle(4,5);
+
+
+public class DRectangle {
+    private double width;
+    private double breadth;
+    ...
+}
+
+DRectangle r2 = new DRectangle(4.2, 1.5);
+
+/**
+ * Generic version of the Rectangle class.
+ * @param <T> the type of the value being boxed
+ */
+
+public class Rectangle <T> {
+
+    private T width;
+    private T breadth;
+
+}
+
+Rectangle<Integer> r1 = new Rectangle<Integer>(4,5);
+Rectangle<Double> r2 = new Rectangle<Double>(4.2, 1.5);
+Rectangle<String> r3 = new Rectangle<String>( "A" , "B");
+
+Rectangle<int> r1 = new Rectangle<int>(4,5); // fails, generics is only for Object type, not for primitive types
+
+```
+
+Integer is a type wrapper for "int"
+Double is a type wrapper for "double"
+Byte is a type wrapper for "byte"
+...
+
+
+
