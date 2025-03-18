@@ -688,5 +688,23 @@ Client decides which type is required:
 
     CLient:
     Plants[] = PlantFactory.getPlants("SUMMER");
-    
+
 ```
+
+I don't want any code changes, but need to switch between strategies.
+Solution: use configuration files like xml / JSON / properties ...
+
+config.properties is a key/value pair
+```
+MOBILE_DAO=com.cisco.prj.dao.MobileDaoDbImpl
+```
+
+load a class programatically:
+
+Class.forName("com.cisco.prg.entity.Mobile"); loads Mobile class into JVM / JRE metaspace
+
+Class.forName("com.cisco.prg.entity.Mobile").getConstructor().newInstance(); // create object
+
+is same as:
+
+new Mobile();
