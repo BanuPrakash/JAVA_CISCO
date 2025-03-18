@@ -37,7 +37,6 @@ public class ArraysExample {
             }
         });
 
-
         for(String name : names) {
             System.out.println(name);
         }
@@ -52,12 +51,17 @@ public class ArraysExample {
 
         System.out.println("Sort Products based on Price :");
 
-        Arrays.sort(products, new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return Double.compare(o1.getPrice(), o2.getPrice());
-            }
-        });
+//        Arrays.sort(products, new Comparator<Product>() {
+//            @Override
+//            public int compare(Product o1, Product o2) {
+//                return Double.compare(o1.getPrice(), o2.getPrice());
+//            }
+//        });
+
+       // Arrays.sort(products, (Product o1, Product o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
+
+        // type infer
+        Arrays.sort(products, (o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
 
         for(Product p : products) {
             System.out.println(p); // toString()

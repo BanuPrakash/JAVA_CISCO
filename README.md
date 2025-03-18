@@ -880,6 +880,10 @@ public class NameComparator implements Comparator<String> {
 public class CategoryComparator implements Comparator<String> {
 
 ```
+Lambda expressions:
+A lambda expression is a short block of code which takes in parameters and returns a value.
+lambda expression can be used instead of anonymous class if interface has only one method to implement.
+
 
 
 
