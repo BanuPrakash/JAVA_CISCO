@@ -1,7 +1,7 @@
 package com.cisco.prj.entity;
 
 // Think Liskov substitution Principle while building generalized object
-public class Product {
+public abstract class Product {
     private int id;
     private String name;
     private double price;
@@ -40,7 +40,9 @@ public class Product {
     }
 
     // i can't decide
-    public boolean isExpensive() {
-        return  false;
-    }
+//    public boolean isExpensive() {
+//        return  false;
+//    }
+
+    public abstract boolean isExpensive();
 }

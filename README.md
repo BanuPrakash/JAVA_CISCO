@@ -539,4 +539,88 @@ m.invoke(p); --> as good as p.getPrice();
 m is pointing to setPrice(amt);
 m.invoke(p, 5000);
 
-==
+=======
+
+abstract, realization relationship, data containers, ...
+
+=======
+
+
+Recap:
+OOP, object, state and behaviour, template -- class
+SOLID Design principles
+What is Java?
+Technology. JDK, JRE, classloader, Metaspace, stack, heap area
+IntelliJ IDE 
+Relationship between objects
+Generalization and Specialization --> Inheritance
+keywords "extends"
+
+Note:
+1) In java every object is inherited from java.lang.Object
+2) Single root hierarchy
+3) java doesn't support multiple inheritance
+class A extends B, C {} // not valid
+4) override: base class already has the behaviour, which inherited class inherites and re-defines it.
+5) UPCASTING and DOWNCASTING
+Before doing Downcasting typechecking has to be done, else there could be ClassCastException.
+TypeChecking can be done using:
+a) instanceof operator [family of]
+b) getClass() method of java.lang.Object [strict checking]
+6) Dynamic binding and polymorphism p.isExpensive()
+7) methods to implement OCP
+
+Day 2
+
+Why do we upcast?
+```
+ Product[] products = new Product[5]; // Array of pointers to Product type, not actual Product
+    products[0] = new Mobile(52, "iPhone 6", 89000.00, "5G"); //upcasting
+    products[1] = new Tv(56, "Onida Thunder", 3200.00, "CRT");//upcasting
+    products[2] = new Tv(71, "Sony Bravia 6", 2_32_000.00, "OLED");//upcasting
+    products[3] = new Mobile(13, "MotoG", 12000.00, "4G");//upcasting
+    products[4] = new Product(511,"Dummy", 0); 
+
+    Helps in OCP:
+     for(Product p : products) {
+            if(p.isExpensive()) { 
+                ...
+            }
+     }
+```
+
+Without upcasting:
+
+```
+    Mobile[] mobiles = new Mobile[100];
+    Tv[] tvs = new Tv[50];
+    DishWasher[] dw = new DishWasher[25];
+
+    for(Mobile m : mobiles) {
+        ...
+    }
+    for(Tv t: tvs) {
+        ...
+    }
+```
+
+=====================
+Abstract class:
+Few types are meant just for generalization, such a thing doesn't exist in real world.
+Example:
+1) Product: public abstract class Product {
+     products[4] = new Product(511,"Dummy", 0);// fails
+
+2) BankingAccount
+
+We can't instantiate an abstract class.
+
+Abstract methods:
+a method can't have any implementation, but we need to enforce it's implmentation in all sub-classes.
+public abstract boolean isExpensive();
+
+Note:
+1) An abstract class need not have abstract methods
+2) If one of the method is marked as abstract, then class has to be declared abstract
+
+
