@@ -866,7 +866,20 @@ System.out.println(p); // p is a product
 
 "Arrays" class is a utility / algorithm class which contains methods for sort, max, min, binarySearch, ... which works on Comparable / Comparator contract
 
+===========
 
+Anonymous class:
+class without a name.
+Objects can be created from anonymous class based on interface / abstract class.
+This class info will be used temporarily to create object, class info won't reside in metaspace
+
+```
+
+public class LengthComparator implements Comparator<String> {
+public class NameComparator implements Comparator<String> {
+public class CategoryComparator implements Comparator<String> {
+
+```
 
 
 

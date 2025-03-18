@@ -3,6 +3,7 @@ package com.cisco.prj.client;
 import com.cisco.prj.entity.Product;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class ArraysExample {
     public static void main(String[] args) {
@@ -25,15 +26,38 @@ public class ArraysExample {
         System.out.println("*****");
 
         System.out.println("Sort names based on Length:");
-        // cleint provides the criteria for comparison --> Comparator
-        Arrays.sort(names, new LengthComprator());
+
+        // client provides the criteria for comparison --> Comparator
+
+//        Arrays.sort(names, new LengthComparator());
+        Arrays.sort(names, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.length() - o2.length();
+            }
+        });
+
+
         for(String name : names) {
             System.out.println(name);
         }
 
-
         System.out.println("*******");
+
         Arrays.sort(products);
+
+        for(Product p : products) {
+            System.out.println(p); // toString()
+        }
+
+        System.out.println("Sort Products based on Price :");
+
+        Arrays.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return Double.compare(o1.getPrice(), o2.getPrice());
+            }
+        });
 
         for(Product p : products) {
             System.out.println(p); // toString()
