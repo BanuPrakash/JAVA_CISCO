@@ -908,6 +908,7 @@ ArrayList list = new ArrayList();
 always program to interface.
 Always use generics, else it is not type-safe
 
+```
 list.add("a");
 list.add(new Product());
 list.add(new Account()); 
@@ -923,5 +924,18 @@ list.add(new Product());
 no need to type-check
 Product p = list.get(1);
 
+```
 
 Collections contain algorithms like sort, max, binarySearch similar to Arrays but can be used on List type of data-container.
+
+Java version 8 introduced streams.
+Stream API is used to process collections of objects. A stream in Java is a sequence of objects that supports various methods [filter, map, reduce, ..] that can be pipelined to produce the desired result. 
+
+https://rxmarbles.com/
+
+Java 8 stream, Set and Map
+Annotation
+Java Concurrency [ multi-threaded application]
+
+
+

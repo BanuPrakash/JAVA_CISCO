@@ -17,6 +17,9 @@ public class ListExample {
         // duplicates are allowed
         products.add(new Product(34, "Wacom", 4500.00, "computer"));
 
+        // Collections.sort(products); // comparable
+
+        // comparator
         Collections.sort(products, (o1, o2) -> Double.compare(o1.getPrice(), o2.getPrice()));
 
         for(Product p : products) {
