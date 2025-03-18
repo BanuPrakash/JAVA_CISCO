@@ -623,4 +623,35 @@ Note:
 1) An abstract class need not have abstract methods
 2) If one of the method is marked as abstract, then class has to be declared abstract
 
+===================
+
+Realization Relationship
+
+A realization relationship signifies that one element/component/object (the client) implements or realizes the behavior specified by another element/component/object (the supplier), often an interface.
+
+Purpose:
+Realization establishes a contract where the client (the implementing element) promises to fulfill the behavior defined by the supplier (the interface or specification). 
+
+Example interface for a Contract:
+
+```
+public interface UserDao {
+     void register(User user);
+     boolean login(String username, String password);
+}
+```
+
+By default all the methods in interface are public and abstract.
+
+Why program to interface?
+1) DESIGN --> drafting interfaces for User stories is easy
+2) IMPLEMENTATION
+3) TESTING --> we can mock and test
+4) INTEGRATION
+5) LOOSE COUPLING
+
+============
+
+"extends" --> Speacialization [IS A]
+"implements" --> realization [ contract / protocol / follow the rules ..], does not establish a IS A
 
