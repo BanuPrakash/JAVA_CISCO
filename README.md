@@ -1035,3 +1035,26 @@ equals() is to check if objects contain same state.
 
 ================
 
+
+HashSet uses hashCode() and equals() method for duplicate identification and deciding the order of where the object has to be inserted in data container.
+
+Default LoadFactory is 75%; if 75 % of buckets are filled, capacity doubles and re-hashing happens
+
+inital capacity = 16 --> 32 --> 64 --> 128
+
+====
+
+TreeSet uses Comparable or Comparator to identify duplicates and deciding on the order of insertion.
+
+Avoid using TreeSet if there is lot of mutation. IT is a Red-Black Tree implementation. 
+can be used only if one time data is inserted and read many operations.
+
+Best way to use is :
+1) use HashSet while adding
+2) while giving the data to client use List, so that client can re-order based on different fields.
+
+
+
+
+
+
