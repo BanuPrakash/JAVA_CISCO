@@ -1054,7 +1054,35 @@ Best way to use is :
 2) while giving the data to client use List, so that client can re-order based on different fields.
 
 
+record is an immutable object,
+it  comes with constructor, getters, toString, hashCode(), equals()
+
+Generally we use this as data carriers.
+Many a times when we join tables fields from different entity has to be combined and given
+
+// order_date from orders table, total from orders table, product name from products table
+public record ReportDTO(String name, Date order_date, double total) {}
+
+DTO : Data transfer objects.
+
+public record Book(int id, String title, double price) {}
+
+Book b = new Book(35, "Java Ref", 890.00);
+
+=========================
 
 
+Map is a key/value pair of storage like dictionary, registry
+HashMap, LinkedHashMap and TreeMap are popular implementations used of Map interface.
+Map produces collection. It is a Set of keys, List of values
 
+Key has to be unique, values can be duplicated
 
+```
+
+Map<String, List<Product>> data  = ..
+
+// key is Class, value is again a map of StudentID and Marks
+Map<String, Map<String, Integer>>  studentReports =  ..
+
+```

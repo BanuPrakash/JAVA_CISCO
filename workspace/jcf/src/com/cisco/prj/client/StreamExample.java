@@ -5,6 +5,7 @@ import com.cisco.prj.entity.Product;
 import java.util.DoubleSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StreamExample {
@@ -67,5 +68,19 @@ public class StreamExample {
         System.out.println("Avg : " + stats.getAverage());
         System.out.println("Product Count : " + stats.getCount());
         System.out.println("Total Cost : " + stats.getSum());
+
+        System.out.println("****");
+        // key is category
+        // values are products belonging to that category
+
+       Map<String, List<Product>> productCat =
+               products.stream().collect(Collectors.groupingBy(p -> p.getCategory()));
+
+       List<Product> mobiles = productCat.get("mobile");
+        System.out.println(mobiles); // toString() on List
+        productCat.forEach( (category, productList) -> {
+            System.out.println("Category :" + category);
+            productList.forEach(p -> System.out.println(p));
+        });
     }
 }
