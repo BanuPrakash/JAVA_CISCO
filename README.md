@@ -937,5 +937,56 @@ Java 8 stream, Set and Map
 Annotation
 Java Concurrency [ multi-threaded application]
 
+===============================
+
+Recap:
+
+Realization relationship: element/component realizes the behiour specified by other element/component.
+Done using interface.
+
+class implements interface.
+
+"extends" is for inheritance,
+"implements" is for realization
+
+Note:
+1) class can extends from only one class, multiple inheritance is not valid in Java
+2) class can realize multiple interfaces
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence,
+               Constable, ConstantDesc {}
+
+Generics. 
+
+Java Collection Framework: Comparable [logic is part of object on which comparision is happening], Comparator [logic is in client code]
+
+Arrays contains methods like sort(), max() ,,, which can be used on array type of data container
+
+List type of data container, ArrayList and LinkedList
+Collections is similar to Arrays class but can be used only on List type of data container.
+
+Anonymous class can be used from interfaces or abstract class. Go for concrete class only if it has extra state or behaviour.
+
+Lambda expressions can be used instead of anonymous class only if there is one method to implement.
+
+=====================================================
+
+Day 3:
+
+High Order Functions:
+1) functions which can accept function as argument
+2) functions which can return a function
+
+treat functions as first-class members like primitive / object
+
+Commonly used high order functions are:
+1) filter accepts Predicate : this function is to get a sub-set of collection based on predicate
+2) map accepts Transform function: this function is use to transform the data
+3) reduce accepts aggregate function: sum(), avg(), count(), 
+4) forEach accepts a consumer function to consume each element
 
 
+Intermediary functions: filter, map, skip, limit, ...
+Terminal functions: forEach, reduce, collect
+
+We need a terminal function in the chain, else data wont flow.
