@@ -990,3 +990,48 @@ Intermediary functions: filter, map, skip, limit, ...
 Terminal functions: forEach, reduce, collect
 
 We need a terminal function in the chain, else data wont flow.
+
+=======
+
+```
+
+        // can re-order
+        Collections.sort(products);
+        Collections.reverse(products);
+        Collections.shuffle(products);
+
+        // index based operations are supported...
+        Product p = products.get(2);
+        products.remove(1);
+
+```
+
+Set type of data container:
+* unique elements
+* not ordered
+* can re-order
+* Can't use index based operation
+
+HashSet [90%] and TreeSet [ 2-3 %] are commonly used Set type of implementations
+
+HashCode:
+1) Numerical value of an object, stored in header part of heap area along with state of object
+2) if 2 objects are similar, then their hash codes has to be same
+3) if 2 objects has same hash code, it doesn't mean they are similar [ possible ]
+
+hashCode() method is inherited from java.lang.Object, we need to override it for our domain/entity/model classes.
+
+java.lang.Object methods:
+1) toString() need to override
+2) hashCode() need to override
+3) getClass() just use it.
+4) equals() need to override
+
+Object equality
+equals() vs  == operator
+
+== operator is to check if both objects are same, pointing to same address in memory
+equals() is to check if objects contain same state.
+
+================
+

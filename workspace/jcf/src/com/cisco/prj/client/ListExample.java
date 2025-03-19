@@ -25,5 +25,15 @@ public class ListExample {
         for(Product p : products) {
             System.out.println(p); // toString()
         }
+
+        // can re-order
+        Collections.sort(products);
+        Collections.reverse(products);
+        Collections.shuffle(products);
+
+        // index based operations are supported...
+        Product p = products.get(2);
+        products.remove(1);
+
     }
 }
