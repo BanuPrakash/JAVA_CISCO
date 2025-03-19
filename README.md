@@ -1240,7 +1240,120 @@ covariant: Generalized one refering to Specialized one.
 
     ? means unknown type
     List<?> elems --> allows accessor but not mutation
-    
+
 ```
+
+Note on GC: Garbage collector / collection
+
+In Java / JavaScript / C# and many other technologies which work on Virtual MAchine / engine concepts we create objects in heap area but won't release memory, GC is responsible for releasing memory to OS.
+
+GC types: Mark Sweep Compact GC, G1GC, ZGC, Epsilon GC, ...
+
+Reference Handler, Signal Dispatcher and Garbage Collector are system threads.
+
+System.gc(); is a request to start GC, not a command
+
+Make job of GC easy, by setting references to null if not used
+
+Rectangle r1 = new Rectangle();
+.....
+
+r1 = null; // good practice
+
+======================================
+
+java  -XX:+UseG1GC Application
+java  -XX:+UseZGC Application --> Huge TB of data
+
+
+=====================================
+
+Java Concurrency: Mutithreaded applications
+
+Process --> program in execution, should have a thread --> unit of work
+
+Single Threaded application is one where in only one unit of work.
+Example: Calculator, notepad, system settings, .
+
+Multi thread applications: we can have many units of work concurrently executing
+Example:
+1) Word
+Document edit is a unit of work, spell check, grammer check, auto save, word count,,,,
+
+2) IntelliJ : Source code, Syntax errors, code complete are all threads
+
+3) Browsers: Get data from Network, render text, rendering  images, handling events, painting , ...
+
+Why do we need multi-threaded applications?
+1) Optimization of available resources: 8 core machine, one thread uses only one core.
+Threads are light-weight process
+2) Avoid Starvation
+
+Java and Threads.
+Java Virtual Machine: one metaspace for loaded classes, one heap area for objects
+for each thread we have a stack.
+Main Thread is started by JRE, main() is an entry point for main thread
+Thread[main,5,main] --> main --> main thread, 5 is priority , main --> Group
+
+System Group: GC , Signal dispatcher, Refernce Handler
+User defined threads by default goes to main group
+```
+interface Runnable {
+    void run(); // entry point for every other thread other than main thread
+}
+
+Any thread we need to create has to realize this interface / protocol / contract
+
+public class GrammerCheck implements Runnable {
+    ....
+    public void run() {
+        ...
+    }
+}
+
+public class SpellCheck implements Runnable {
+    ....
+    public void run() {
+        ...
+    }
+}
+```
+
+Thread class contains methods to control life-cycle of Thread
+1) start()
+2) sleep(long ms)
+3) join()
+4) yield()
+Deprecated methods:
+5) stop()
+6) suspend()
+7) resume()
+
+Pre-emptive OS like ios, windows can have a thread pre-empt and give a change for other threads to execute
+
+Non-Premeptive OS like Solaris: Once Thread gets a change, it tries to complete, here we can force it to prempt by calling yield()
+
+Java Threads ==> OS Threads
+
+run() completes
+Exception occurs
+stop()
+
+main()
+
+doTask()
+
+run()
+
+a()
+
+b()
+
+DefaultHandler
+
+
+
+
+
 
 
