@@ -2,8 +2,10 @@ package com.cisco.prj.client;
 
 import com.cisco.prj.entity.Product;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamExample {
     public static void main(String[] args) {
@@ -49,5 +51,21 @@ public class StreamExample {
                  .map(p -> p.getPrice())
                  .reduce( 0.0, (v1, v2) -> v1  + v2);
         System.out.println("Total Cost of all Mobiles : " + total);
+
+        System.out.println("Collect");
+
+        List<String> names =  products.stream()
+                .filter(p -> p.getCategory().equals("mobile"))
+                .map(p -> p.getName())
+                .collect(Collectors.toList());
+
+        DoubleSummaryStatistics stats =
+                products.stream().collect(Collectors.summarizingDouble(p -> p.getPrice()));
+
+        System.out.println("Max : " + stats.getMax());
+        System.out.println("Min : " + stats.getMin());
+        System.out.println("Avg : " + stats.getAverage());
+        System.out.println("Product Count : " + stats.getCount());
+        System.out.println("Total Cost : " + stats.getSum());
     }
 }
