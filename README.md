@@ -1223,5 +1223,23 @@ AnnotationProcessor.generateCreateStatement(Product.class); --> create table
 
 String is immutable, StringBuilder is mutable
 
-More on "Class clazz"
+===================
+
+Arrays are co-variant, generic collections are not covariant
+
+covariant: Generalized one refering to Specialized one.
+```
+    Arrays are not type-safe
+    Object[] ref = new String[3]; // valid
+    ref = new String("Hello"); 
+    ref = new Date(); // at run time this throws an error --> ArrayStoreException
+
+    Generic Collections are not Covariant, to make it type-safe
+
+    List<Object> = new ArrayList<String>(); // compiler error
+
+    ? means unknown type
+    List<?> elems --> allows accessor but not mutation
+```
+
 
