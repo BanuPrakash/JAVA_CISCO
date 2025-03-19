@@ -28,6 +28,7 @@ public class Rectangle {
         this.breadth = breadth;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         Rectangle other = (Rectangle) obj;

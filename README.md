@@ -1086,3 +1086,115 @@ Map<String, List<Product>> data  = ..
 Map<String, Map<String, Integer>>  studentReports =  ..
 
 ```
+
+Annotation:
+are metadata; data about data; additional information
+
+Built-in annotation : @Override, @SuppressWarnings, ...
+
+Questions to be asked:
+1) Who is using annotation?
+    a) COMPILER
+    b) CLASSLOADER
+    c) RUNTIME [ JRE ]
+
+2) Where can i use it?
+    a) TYPE {class, interface, annotation, record, enum}
+    b) METHOD
+    c) CONSTRUCTOR
+    d) Fields
+    e) PARAMETERS
+
+@Override annotation is used by the Compiler, compiler sees the source code and checks if the method signature matches with the base class signature.
+If it matches compiler compiles the class, else compiler error.
+
+```
+    class Base {
+        public void doTask() {
+
+        }
+    }
+
+    class Derived extends Base {
+        @Override
+        public void dotask() { // compiler fails
+
+        }
+    } 
+
+    Base b = new Derived();
+    b.doTask();
+
+```
+
+Rules of overriding:
+
+1) method name has to be same
+2) return type can be same or it's sub type
+3) visiblity has to be same or enhance it, can't reduce the visibilty
+
+```
+    class Account {
+        public Account getAccount() {...}
+
+        void doTask() {} // default visiblity
+    }
+
+    class SavingsAccount {
+        @Override
+        public SavingsAccount getAccount() { ...}
+
+        @Override
+        public void doTask() {..} // enhance the visibility
+    }
+
+```
+
+User defined Annotation example:
+Mobile is an annotation
+
+```
+@Target(TYPE)
+@Retention(CLASS)
+public @interface Mobile {
+    String os();
+}
+
+@Mobile(os="android")
+public class CandyCrush extends Game {
+
+}
+
+```
+
+Compiler ignores the annotation and carries it into .class file
+
+if we customize compiler, we can write our own annotations for compiler
+if we customize Classloader, we can write our own annotations to be used classloader.
+
+Let's create a sample ORM [ Object Relational Mapping]
+
+I will create 2 annotations like Table and Column
+
+```
+
+@Table(name="books")
+public class Book {
+    @Column(name="BOOK_ID", type="NUMERIC(10)")
+    id;
+     @Column(name="BOOK_TITLE")
+    title;
+     @Column(name="COST", type="NUMERIC(10, 2)")
+    price;
+}
+
+
+SET the property:
+name="books"
+
+GET the Property:
+String str = name();
+```
+
+We need a utility class / annotation processor to read annotations and generate SQL for us.
+
