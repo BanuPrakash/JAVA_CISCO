@@ -1196,5 +1196,32 @@ GET the Property:
 String str = name();
 ```
 
+
+@Retention(SOURCE) : for Compiler, compiler after compilation will remove the metadata from .class file
+
+@Retention(CLASS) : for CLASSLOADER, compiler keeps the metadata in .class file, classloader after loading the class in JRE-METASPACE, it removes the metadata from class definifition in metaspace
+
+@Retention(RUNTIME): compiler keeps it in .class file , classloader also keeps it metaspace, JRE can read it.
+
+
+```
+
+http://localhost:8080/products
+
+@WebServlet("/products")
+public class ProductServlet extends Servlet {
+
+}
+
+```
+
+
 We need a utility class / annotation processor to read annotations and generate SQL for us.
+
+AnnotationProcessor.generateCreateStatement(Employee.class); --> CREATE Table ..
+AnnotationProcessor.generateCreateStatement(Product.class); --> create table
+
+String is immutable, StringBuilder is mutable
+
+More on "Class clazz"
 
