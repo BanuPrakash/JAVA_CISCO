@@ -1550,15 +1550,130 @@ Solution with new Lock Apis:
         }
     ```
 
-Callable and Future
+===================
 
+Maven/Gradle are build automation tool used primarily for Java projects.
+Why Maven projects?
+* Maven projects are portable across different IDEs, gives a standard folder structure which is independent of IDEs
+* With Maven we can configure JDK version, Compiler version , ...
+* Automate compilation, testing and building archives, deploying to server
+* Most Important: Manage dependencies 
 
+Project depends on many 3rd party libraries
+like cisco libraries, hibernate libraries, spring libraries --> in the form of jar files
+jar --> java Archive --> library
 
+We can download each and every library and link it to project
+~30 min jar files has to be linked.
+Making sure every team member downloads from same source
+Transitive dependencies: a-1.2.jar ---> b-4.1.jar --> c-5.11.jar 
+b-4.1.jar --> xyz-4.1.jar
+
+https://repo1.maven.org/maven2
+
+Dependency:
+```
+
+<dependency>
+    <groupId>com.cisco.prj</groupId>
+    <artifactId>module_name</artifactId>
+    <version> 1.0.0 </version>
+</dependecy>
+
+```
     
+JDBC: Java Database Connectivity an integration library to connect to RDBMS.
+JDBC is a set of interfaces, implemenation classes are provided by database vendors [Oracle / MySQL / SQLServer/..]
+
+Java String --> VARCHAR in MySQL
+Java String --> VARCHAR2 in Oracle
+Java String --> Text in SQLServer
+
+Steps involved to interact with database [ RDBMS]
+```
+1) Load database vendors provided drivers
+
+Class.forName("oracle.jdbc.Driver");
+
+Class.forName("com.mysql.jdbc.Driver");
+
+2) Establish database connection
+
+Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+Connection is a interface
+getConnection() is a factory method, based on URL passed it creates OracleConnection / MySQLConnection ..
+
+Connection con = DriverManager.getConnection("jdbc:mysql://192.23.44.11:3306/emp_db", "root", "secret123");
+
+Connection con = DriverManager.getConnection("jdbc:oracle:thin: @192.23.44.11:3306:emp_db", "root", "secret123");
+
+3) Send SQL statements for DML [ avoid DDL -- should be done in database]
+3.1) Statement
+use this if SQL is fixed and same for every requests
+select * from products
+
+3.2) PreparedStatement
+use this if SQL takes IN parameters [?] from request/client
+
+select * from users where username = ? and password = ?
+
+select * from products where category = ?
+
+insert into users values (? ,? , ? , ?);
+
+3.3) CallableStatement
+use this if we need to execute Stored Procedures of database
+
+create procedure transaction(fromAcc, toAcc, amt) as 
+begin
+  SAVEPOINT Inserts_Point;
+  BEGIN
+    insert into table1.....
+    insert into table2......
+    insert into table3.... 
+  exception
+    when others then
+      roolback to savepoint Inserts_Point;
+      RAISE; -- if necessary by the logic
+  end;
+end;
+
+from Java:
+using CallableStatement --> call transaction("SB123", "SB421", 9000);
+
+4) Process Results
+
+int executeUpdate(SQL); // INSERT, DELETE or UPDATE SQL { int represents how many records are effected}
+
+ResultSet executeQuery(SQL); // SELECT
+
+ResultSet is a cursor to fetched records
+
+5) Don't forget to release resources like opened connection in finally block
+
+```
 
 
+Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.
 
+container --> Software running on Docker; mysql , redis, kafka, prometheus, ..
+images --> softwares
 
+docker pull mysql:@latest
 
+docker run -p 3306:3306 -d --name local-mysql -e MYSQL_ROOT_PASSWORD=Welcome123 mysql
 
+mysql --> image
+local-mysql --> container
+-e --> environment variables
+-p --> port to expose
+-p 1234:5555 => on docker software runs on port 5555, i am exposing it as 1234 for other applications
 
+docker exec -it local-mysql bash
+
+# mysql -u root -p
+mysql> create database JAVA_CISCO_DB;
+mysql> use JAVA_CISCO_DB;
+
+=======
