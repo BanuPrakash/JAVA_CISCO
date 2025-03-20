@@ -1436,6 +1436,122 @@ wait() : Thread releases a lock and goes to waitlist
 notify() : thread informs one of the thread in waitlist that state has changed, waiting thread can try getting lock, doesn't need to wait for complete time mentioned in wait()
 notifyAll(): thread informs all of the threads in waitlist
 
+=================
+
+Issues with old Thread APIs:
+1) Only one mutex / lock per object
+
+One Object one lock.
+
+If Transaction is happening, no thread can update profile data.
+If a thread is updating a Profile data, no transactions can happen
+
+```
+    public class Account {
+        private double balance; //heap area, shared by threads, not thread-safe
+        private UserProfile profile; // email, password, phone
+
+        public synchronized  void deposit(String name, double amt) {
+            ...
+        }
+
+        public synchronized void updateProfile(UserProfile p) {
+            ...
+        }
+    }
+
+
+```
+
+Solution:
+    use Lock Api developed by Doug Lea
+
+2) Only thread which has acquired the lock can release 
+Solution: Lock api: any thread can call unlock() --> Make sure only Admin does this
+
+3) Old Apis deadlock possibility was there, solved with Lock Apis [new]
+Also no timeout for lock acquisition.
+
+With Synchronized:
+
+We need to lock both fromAcc and toAcc
+```
+    class BankingService {
+        public  void transferFunds(Account fromAcc, Account toAcc, double amt) {
+            synchronized(fromAcc) { // acquire lock on fromAcc
+                synchronized(toAcc) { // acquire lock on toAcc
+                    fromAcc.getBalance();
+                      logic
+                    fromAcc.withdraw(amt);
+                    toAcc.deposit(amt);
+                }
+            } 
+        }
+    }
+
+````
+Possibility of Deadlock:
+Thread t1 : SA123 --> SA 900 amt of 5000
+Thread t2: SA900 -> SA123 amt of 9000
+
+ synchronized(fromAcc) { // t1 acquires lock on SA123
+
+ synchronized(fromAcc) { // t2 acquires lock on SA 900
+
+Deadlock
+ t1 waits for SA 900 lock
+t2 waits for SA 123 lock
+
+===
+
+Solution with new Lock Apis:
+
+```
+      class BankingService {
+        public  void transferFunds(Account fromAcc, Account toAcc, double amt) {
+            if(fromAcc.tryLock(1000)) { // t1 gets SA123 lock, t2 gets SA900 lock
+                try {
+                    if(toAcc.tryLock(1000)) { // t1 waits for SA 900, t2 waits for SA123
+                        try {
+                             fromAcc.getBalance();
+                                logic
+                            fromAcc.withdraw(amt);
+                            toAcc.deposit(amt);
+                        } finally {
+                            toAcc.unlock();
+                        }
+                    }
+
+                } finally {
+                    fromAcc.unlock(); // t1 releases SA900 lock
+                }
+            }
+
+        }
+      }
+
+```
+4) Thread Pool
+    start() --> start0() -->  create a Stack --> put run() method on stack.
+    Latency in doing this
+    when thread dies, stack has to be destroyed
+    latency in releasing memory
+
+    Solution: Thread pools
+
+5) Runnable doesn't return a value, nor throws an Exception
+    public void run(); // signature
+
+    Solution: Callable interface
+
+    ```
+        interface Callable<T> {
+            T call() throws Exception;
+        }
+    ```
+
+    Explain later ...
+    
 
 
 
