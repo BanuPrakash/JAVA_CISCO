@@ -1397,8 +1397,18 @@ Example of Daemon thread can be:
 
 Daemon threads can be used also to do backup in the background [ copy from MongoDB to MySQL]..
 
+========
+
+Thread Safety: A member is said to be thread safe if it doesn't get corrupted in multi-threaded environment
+
+1) Local variables --> reside on Stack, each thread has seperate stack --> Thread Safe
+2) instance variables [state] --> reside on Heap, every thread shares the heap area --> Not Thread Safe
+3) static variables [state of class] -> reside on Metaspace, threads share the loaded class --> Not Thread safe
+4) immutable objects --> heap, shared by threads --> Thread Safe
+5) volatile members --> heap, shared by threads --> thread Safe. 
 
 
+join() --> specify that the caller thread has to wait for other thread to finish its execution.
 
 
 
