@@ -1333,23 +1333,73 @@ Pre-emptive OS like ios, windows can have a thread pre-empt and give a change fo
 
 Non-Premeptive OS like Solaris: Once Thread gets a change, it tries to complete, here we can force it to prempt by calling yield()
 
-Java Threads ==> OS Threads
+-------
 
-run() completes
-Exception occurs
-stop()
+Recap:
+    Java Collection Framework: Comparable vs Comparator, Arrays vs Collections
+    List and Set; ArrayList, LinkedList, HashSet and TreeSet
+    Map [key/value] pair: HashMap
 
-main()
+    Annotation: public @annotationName { properties }
+    Annotation can't have fields and methods, only properties can be present
+    Annotation has to marked with @Retention to specify if this is going to be used by Compiler, ClassLoader or Runtime [JRE]
 
-doTask()
+    Threads: Java Concurrency
+    Why?
+    Runnable interface and Thread class
+    Note: Thread class implements Runnable interface.
 
-run()
+    How we create threads in Java?
+    Option 1:
+    ```
+        Part of Code is running as Thread
+        public class RacingGame extends Game implements Runnable {
+            ...
+            begin() {..}
+            left() {..}
+            right() {...}
+            applyBrakes() {...}
+            // run() has execute as seperate thread
+            public void run() {
+                while(true) {
+                    update time and score on the screen
+                }
+            }
+        }
 
-a()
+        Thread t1 = new Thread(new GrammerCheck());
 
-b()
+    ```
+    Option 2:
+        ```
+            New Thread type:
+             public class GrammerCheck extends Thread {
+                ...
+                public void run() {..}
+            }
+        ```
 
-DefaultHandler
+Day 4:
+
+Process terminates when the last Non-Daemon thread finishes its execution, process doesn't wait for Daemon threads.
+
+Daemon threads are not supposed to be performing critical jobs. More of helpers
+
+Example of Daemon thread can be:
+```
+    public void run() {
+        while(true) {
+            wait for 1 second
+            update the screen with Time
+        }
+    }
+```
+
+Daemon threads can be used also to do backup in the background [ copy from MongoDB to MySQL]..
+
+
+
+
 
 
 
