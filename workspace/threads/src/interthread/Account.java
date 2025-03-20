@@ -1,4 +1,4 @@
-package threadsafety;
+package interthread;
 
 public class Account {
     private double balance; //heap area, shared by threads, not thread-safe
@@ -34,11 +34,21 @@ public class Account {
         bal += amt;
         System.out.println(name + " setting balance  " + bal);
         setBalance(bal);
+
+        notifyAll();
     }
 
     public synchronized void withdraw(String name, double amt) {
         System.out.println(name + " withdrawing ...");
         System.out.println(name + " getting balance ");
+        while(getBalance() < amt) {
+            System.out.println("Insufficient balance!!! " + getBalance());
+            try {
+                wait(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         double bal = getBalance();
         System.out.println(name + " got balance " + bal);
         bal -= amt;

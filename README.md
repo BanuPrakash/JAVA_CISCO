@@ -1410,6 +1410,33 @@ Thread Safety: A member is said to be thread safe if it doesn't get corrupted in
 
 join() --> specify that the caller thread has to wait for other thread to finish its execution.
 
+Use case of join();
+Main thread opens files for reading and writing.
+Starts ReadingThread and gives him f1
+starts WritingThread and gives him f2
+Main has to wait for ReadingThread and WritingThread to finish exection before the main thread can close the files [ Solution: join()];
+
+synchronzied: mark a block of code as synchronzied to make it thread-safe.
+
+Thread can enter a synchronzied area / protected  only if it has acquired a lock/mutex 
+
+Critical sections:
+public synchronized  void deposit(String name, double amt) {
+public synchronized void withdraw(String name, double amt) {
+
+
+By default "lock/mutex" is released when thread comes out of critical section, complete the method
+
+============
+
+Inter-Thread Communication.
+
+java.lang.Object methods:
+wait() : Thread releases a lock and goes to waitlist
+notify() : thread informs one of the thread in waitlist that state has changed, waiting thread can try getting lock, doesn't need to wait for complete time mentioned in wait()
+notifyAll(): thread informs all of the threads in waitlist
+
+
 
 
 

@@ -1,15 +1,22 @@
-package threadsafety;
+package interthread;
 
 public class BankingClient {
     public static void main(String[] args) {
         Account account = new Account(5000);
         TransactionThread t1 = new TransactionThread(account, "Divya", TransactionType.CREDIT, 2500);
         TransactionThread t2 = new TransactionThread(account, "\tRajesh", TransactionType.CREDIT, 3000);
-        TransactionThread t3 = new TransactionThread(account, "\t\tRia", TransactionType.DEBIT, 2000);
+        TransactionThread t3 = new TransactionThread(account, "\t\tRia", TransactionType.DEBIT, 7000);
+
+        t3.start();
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         t1.start();
         t2.start();
-        t3.start();
+
 
         try {
             // Barrier
