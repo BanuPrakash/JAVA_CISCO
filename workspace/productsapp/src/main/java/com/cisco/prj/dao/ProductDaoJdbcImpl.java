@@ -7,14 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJdbcImpl implements ProductDao {
-    // load drivers of database
-    static  {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     public void addProduct(Product product) throws PersistenceException {
@@ -22,7 +15,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         Connection con = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/JAVA_CISCO_DB", "root", "Welcome123");
+            con = DBUtil.getConnection();
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, product.getName());
             ps.setDouble(2, product.getPrice());
@@ -30,13 +23,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
         } catch (SQLException e) {
             throw new PersistenceException("unable to add product!!!", e);
         } finally {
-            if(con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            DBUtil.closeConnection(con);
+//            if(con != null) {
+//                try {
+//                    con.close();
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
         }
         }
 
@@ -47,7 +41,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
         Connection con = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/JAVA_CISCO_DB", "root", "Welcome123");
+            con = DBUtil.getConnection();
+            //DriverManager.getConnection("jdbc:mysql://localhost:3306/JAVA_CISCO_DB", "root", "Welcome123");
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             while (rs.next()) {
@@ -58,13 +53,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
         } catch (SQLException e) {
             throw new FetchException("unable to get products!!!", e);
         } finally {
-            if(con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            DBUtil.closeConnection(con);
+//            if(con != null) {
+//                try {
+//                    con.close();
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
         }
 
         return products;
