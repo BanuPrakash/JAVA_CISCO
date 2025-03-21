@@ -1,6 +1,7 @@
 package com.cisco.prj.web;
 
 import com.cisco.prj.dao.FetchException;
+import com.cisco.prj.dao.PersistenceException;
 import com.cisco.prj.dao.ProductDao;
 import com.cisco.prj.dao.ProductDaoJdbcImpl;
 import com.cisco.prj.entity.Product;
@@ -47,5 +48,21 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace(); // development, maintenance stage
         }
         out.print("</table></body></html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ProductDao productDao = new ProductDaoJdbcImpl(); // use factory instead
+        Product p = new Product();
+        p.setName(req.getParameter("name"));
+        p.setPrice(Double.parseDouble(req.getParameter("price")));
+
+        try {
+            productDao.addProduct(p);
+//            System.out.println("Product added Successfully!!!");
+            resp.sendRedirect("index.html");
+        } catch (PersistenceException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
