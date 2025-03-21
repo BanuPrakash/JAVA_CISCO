@@ -5,6 +5,8 @@ import com.cisco.prj.entity.Product;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ProductDaoJdbcImpl implements ProductDao {
 
@@ -51,7 +53,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
                             rs.getDouble("price")));
             }
         } catch (SQLException e) {
-            throw new FetchException("unable to get products!!!", e);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("messages", Locale.FRENCH);
+            throw new FetchException(resourceBundle.getString("PRODUCT_ADDED"), e);
         } finally {
             DBUtil.closeConnection(con);
 //            if(con != null) {

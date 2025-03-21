@@ -1691,3 +1691,72 @@ It aims to reduce the amount of manual coding, thereby streamlining the codebase
 
 
 https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+
+
+Web Servers: Apache / IIS / NginX / Netty ...
+
+Engines: PHP / Servlet engine / CGI / .NET/ NodeJS ...
+
+Servlet Engine is configured with Web Server to serve dynaminc content developed using Java Technology.
+
+Tomcat / Jetty / Netty are examples of Servlet Container / Servlet Engine / Web Container
+
+Http Method of REQUESTS:
+GET, POST, PUT , DELETE
+
+CRUD operation CREATE READ UPDATE DELETE
+GET --> READ
+POST --> CREATE
+PUT / PATCH --> UPDATE
+DELETE --> DELETE
+
+HttpServletRequest: encapsulates all data coming from client: Form data, browser, OS, ...
+
+
+HttpServletResponse: used to write data back to client
+
+
+```
+GET http://localhost:8080/products
+
+@WebServlet("/products")
+public class ProductServlet extends HttpServlet {
+    public void doGet(HttpServletRequest req, HttpServletResponse res) {
+        ...
+    }
+     public void doPut(HttpServletRequest req, HttpServletResponse res) {
+        ...
+    }
+}
+
+```
+
+
+Deployment Descriptor: Information to the Servlet engine/Servlet Container / Web Container
+to specify which objects it has to instantiate
+new ProductServlet(); // we won't do this. Engine creates object based on Deployment Descriptor
+Mapping URL to a Servlet
+
+web.xml is called as deployment descriptor
+
+```
+    <servlet>
+        <servlet-name>First</servlet-name>
+        <servlet-class> pkg.ProductServlet </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>First</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+```
+
+Finally we need to archive the files and load on engine [ war]
+war --> Web Archive
+
+in pom.xml
+ <packaging>war</packaging>
+ 
+MAven --> Execute Maven Goal
+mvn jetty:run
+    --> triggers War plugin
+    --> triggers Compiler plugin
