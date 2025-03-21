@@ -1670,10 +1670,20 @@ local-mysql --> container
 -p --> port to expose
 -p 1234:5555 => on docker software runs on port 5555, i am exposing it as 1234 for other applications
 
+```
 docker exec -it local-mysql bash
 
 # mysql -u root -p
 mysql> create database JAVA_CISCO_DB;
 mysql> use JAVA_CISCO_DB;
 
+```
 =======
+
+Day 5:
+
+https://mvnrepository.com/
+
+
+
+
