@@ -28,7 +28,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             ps.setDouble(2, product.getPrice());
             ps.executeUpdate(); // insert, delete or update SQL
         } catch (SQLException e) {
-            throw new PersistenceException("unable to add product!!!");
+            throw new PersistenceException("unable to add product!!!", e);
         } finally {
             if(con != null) {
                 try {
@@ -56,7 +56,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
                             rs.getDouble("price")));
             }
         } catch (SQLException e) {
-            throw new FetchException("unable to get products!!!");
+            throw new FetchException("unable to get products!!!", e);
         } finally {
             if(con != null) {
                 try {

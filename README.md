@@ -1690,4 +1690,4 @@ Key features include automatic generation of getters, setters, equals, hashCode,
 It aims to reduce the amount of manual coding, thereby streamlining the codebase and reducing potential for errors.
 
 
-
+https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
