@@ -1684,6 +1684,10 @@ Day 5:
 
 https://mvnrepository.com/
 
+Lombok is a Java library that provides annotations to simplify Java development by automating the generation of boilerplate code. 
+
+Key features include automatic generation of getters, setters, equals, hashCode, and toString methods, as well as a facility for automatic resource management. 
+It aims to reduce the amount of manual coding, thereby streamlining the codebase and reducing potential for errors.
 
 
 
